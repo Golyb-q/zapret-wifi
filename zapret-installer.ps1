@@ -55,8 +55,11 @@ function Remove-OldVersions($currentTag) {
     }
 
     while ($true) {
-        $service_WinDivert = (Get-Service -Name WinDivert -ErrorAction SilentlyContinue)?.Status -eq 'Running'
-        $service_WinDivert14 = (Get-Service -Name WinDivert14 -ErrorAction SilentlyContinue)?.Status -eq 'Running'
+        $svc1 = Get-Service -Name WinDivert -ErrorAction SilentlyContinue
+        $svc2 = Get-Service -Name WinDivert14 -ErrorAction SilentlyContinue
+        $service_WinDivert = $svc1 -and $svc1.Status -eq 'Running'
+        $service_WinDivert14 = $svc2 -and $svc2.Status -eq 'Running'
+
 
         if (-not ($service_WinDivert -or $service_WinDivert14)) {
             break  # сервисов нет — выходим из цикла

@@ -1,4 +1,4 @@
-# Путь к скрипту-инсталлеру
+﻿# Путь к скрипту-инсталлеру
 $installerPath = Join-Path $PSScriptRoot "zapret-installer.ps1"
 
 # 1. Запуск инсталляции (обновление)

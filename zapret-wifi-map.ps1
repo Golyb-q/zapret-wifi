@@ -1,4 +1,4 @@
-# zapret-wifi-map.ps1
+﻿# zapret-wifi-map.ps1
 $configPath = Join-Path $PSScriptRoot "zapret-wifi-history.txt"
 
 function Load-WifiMap {

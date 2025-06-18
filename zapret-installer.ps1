@@ -1,4 +1,4 @@
-# Параметры проекта
+﻿# Параметры проекта
 $Owner = "Flowseal"
 $Repo = "zapret-discord-youtube"
 $ApiUrl = "https://api.github.com/repos/$Owner/$Repo/releases/latest"

@@ -1,4 +1,4 @@
-# zapret-run-auto.ps1
+﻿# zapret-run-auto.ps1
 $installerPath = Join-Path $PSScriptRoot "zapret-installer.ps1"
 $configPath = Join-Path $PSScriptRoot "zapret-wifi-history.txt"
 

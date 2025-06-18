@@ -60,7 +60,6 @@ function Remove-OldVersions($currentTag) {
         $service_WinDivert = $svc1 -and $svc1.Status -eq 'Running'
         $service_WinDivert14 = $svc2 -and $svc2.Status -eq 'Running'
 
-
         if (-not ($service_WinDivert -or $service_WinDivert14)) {
             break  # сервисов нет — выходим из цикла
         }
@@ -71,7 +70,6 @@ function Remove-OldVersions($currentTag) {
         Start-Process -FilePath "$($folders)\service.bat"
         Read-Host
     }
-
 
     foreach ($folder in $folders) {
         try {

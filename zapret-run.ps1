@@ -2,7 +2,6 @@
 $installerPath = Join-Path $PSScriptRoot "zapret-installer.ps1"
 
 # 1. Запуск инсталляции (обновление)
-Write-Host "🛠 Запуск обновления..."
 & $installerPath
 
 # 2. Находим папку с самой новой версией
@@ -15,9 +14,7 @@ if (-not $latestFolder) {
     Write-Warning "❌ Не найдена папка с установленной версией"
     exit
 }
-
 $batFolder = $latestFolder.FullName
-Write-Host "📂 Используется папка: $batFolder"
 
 # 3. Получаем список всех .bat файлов
 $batFiles = Get-ChildItem -Path $batFolder -Filter '*.bat' | Sort-Object Name

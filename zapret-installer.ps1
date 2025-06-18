@@ -23,7 +23,7 @@ function Get-ExtractPath($tag) {
 function Download-Zip($asset, $destinationPath) {
     Write-Host "⬇️  Скачиваем архив: $($asset.name)..."
     Invoke-WebRequest -Uri $asset.browser_download_url -OutFile $destinationPath
-    Write-Host "✅ Архив загружен: $destinationPath"
+    Write-Host "✅ Архив загружен"
 }
 
 function Extract-Zip($zipPath, $extractPath) {
@@ -34,7 +34,7 @@ function Extract-Zip($zipPath, $extractPath) {
 
     if ($zip -and $dest) {
         $dest.CopyHere($zip.Items(), 0x14)
-        Write-Host "📂 Распаковано в: $extractPath"
+        Write-Host "📂 Распаковано"
         return $true
     } else {
         Write-Warning "❌ Ошибка при распаковке"
@@ -44,11 +44,11 @@ function Extract-Zip($zipPath, $extractPath) {
 
 function Cleanup-Zip($zipPath) {
     Remove-Item $zipPath -Force
-    Write-Host "🗑 Удалён архив: $zipPath"
+    Write-Host "🗑 Архив удалён"
 }
 
 function Remove-OldVersions($currentTag) {
-    Write-Host "🧹 Удаление старых версий (кроме: zapret-$currentTag)..."
+    Write-Host "🧹 Удаление старых версий..."
     $pattern = "^zapret-(.+)$"
     $folders = Get-ChildItem -Path $PSScriptRoot -Directory | Where-Object {
         $_.Name -match $pattern -and $_.Name -ne "zapret-$currentTag"
@@ -89,8 +89,7 @@ function Main {
 
     $extractPath = Get-ExtractPath $latestTag
     if (Test-Path $extractPath) {
-        Write-Host "✅ Папка с этой версией уже существует: $extractPath"
-        Write-Host "⏩ Пропуск загрузки и распаковки"
+        Write-Host "✅ Версия $latestTag уже установлена"
         return
     }
 

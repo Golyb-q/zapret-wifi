@@ -6,8 +6,13 @@ $installerPath = Join-Path $PSScriptRoot "zapret-installer.ps1"
 
 # 2. Находим папку с самой новой версией
 $latestFolder = Get-ChildItem -Path $PSScriptRoot -Directory |
-    Where-Object { $_.Name -match '^zapret-(\d+\.\d+\.\d+)$' } |
-    Sort-Object { [version]($_.Name -replace '^zapret-', '') } -Descending |
+    Where-Object { $_.Name -match '^zapret-' } |
+    Sort-Object {
+        # убрать "zapret-" и удалить всё кроме цифр и точек (1.9.0b -> 1.9.0)
+        $verStr = ($_.Name -replace '^zapret-','') -replace '[^0-9\.]',''
+        # безопасно попытаться привести к [version]
+        try { [version]$verStr } catch { [version]'0.0.0' }
+    } -Descending |
     Select-Object -First 1
 
 if (-not $latestFolder) {
